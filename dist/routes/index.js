@@ -5,6 +5,7 @@ const UsersController_1 = require("../controllers/UsersController");
 const FeedbackController_1 = require("../controllers/FeedbackController");
 const GradesController_1 = require("../controllers/GradesController");
 const ProgressController_1 = require("../controllers/ProgressController");
+const TranscriptController_1 = require("../controllers/TranscriptController");
 const router = express_1.Router();
 router.get('/', (req, res) => {
     res.send(`<b>user-related endpoints</b>
@@ -51,4 +52,6 @@ router.post('/grades', GradesController_1.uploadGrade); // upload new grade for 
 router.get('/progress/user/:userID', ProgressController_1.getUserProgress); // get progress of all courses for a specific user 
 router.post('/progress', ProgressController_1.saveProgress); // save course progress for a user
 router.post('/progress/user/:userID', ProgressController_1.updateProgress); // update an existing user course progress
+// transcript-related endpoints
+router.get('/transcript/user/:userID', TranscriptController_1.getUserTranscript); // generate a transcript of completed courses for that user
 exports.default = router;

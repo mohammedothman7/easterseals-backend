@@ -26,7 +26,7 @@ export const getUser = async (req: Request, res: Response): Promise<Response> =>
         return res.status(400).json("Please enter required fields!");
 
     try {
-        // retrive user object
+        // retrieve user object
         const user: QueryResult = await pool.query('Select * FROM users WHERE id = $1', [userID]);
 
         // if current user's email does not match account to be retrieved
@@ -108,7 +108,6 @@ export const signInUser = async (req: Request, res: Response): Promise<Response>
         );
 
         if (isMatch) {
-            // TODO: Update signInUser function on backend to not return hashed password - security risk
             // return all except password
             delete user.rows[0].password;
 
@@ -160,7 +159,7 @@ export const updateUserPassword = async (
         return res.status(400).json("Please enter required fields!");
 
     try {
-        // retrive user to-be-updated object
+        // retrieve user to-be-updated object
         const user: QueryResult = await pool.query(
             "Select * FROM users WHERE id = $1",
             [userID]
@@ -292,7 +291,7 @@ export const updateUser = async (
   } = req.body;
 
   try {
-    // retrive user to-be-updated object
+    // retrieve user to-be-updated object
     const user: QueryResult = await pool.query(
       "Select * FROM users WHERE id = $1",
       [userID]
@@ -383,7 +382,7 @@ export const deleteUser = async (req: Request, res: Response): Promise<Response>
         return res.status(400).json("Please enter required fields!");
 
     try {
-        // retrive user to-be-deleted object
+        // retrieve user to-be-deleted object
         const user: QueryResult = await pool.query('Select * FROM users WHERE id = $1', [userID]);
 
         // if current user's email does not match account to be deleted

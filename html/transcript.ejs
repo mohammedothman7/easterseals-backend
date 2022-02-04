@@ -1,0 +1,192 @@
+<!-- This is the EJS (Embedded JavaScript) that displays the courses data in HTML -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
+    <!-- removed link to local CSS stylesheet to find out why styling isn't rendering -->
+    <!-- <link href="main.css" rel="stylesheet" />  -->
+
+    <!-- using style tag instead  -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: 14px;
+        }
+
+        /* background of the whole doc */
+        .doc_body {
+            width: 816px;
+            height: 1056px;
+            background: rgba(250, 250, 250, 1);
+            opacity: 1;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            overflow: hidden;
+        }
+
+        .watermark {
+            width: 552px;
+            height: 217px;
+            /* water mark */
+            background: url("Veteran-Staffing-Network-Logo-RGB-scaled 1.png");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            opacity: 1;
+            position: absolute;
+            top: 419px;
+            left: 132px;
+            overflow: hidden;
+        }
+
+        .transcript_title {
+            width: 382px;
+            color: rgba(51, 51, 51, 1);
+            position: absolute;
+            top: 28px;
+            left: 456px;
+            text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+            font-family: Poppins;
+            font-weight: Medium;
+            font-size: 20px;
+            opacity: 1;
+            text-align: left;
+        }
+
+        .student_name {
+            width: 254px;
+            color: rgba(51, 51, 51, 1);
+            position: absolute;
+            top: 204px;
+            left: 551px;
+            font-size: 16px;
+            opacity: 1;
+            text-align: left;
+        }
+
+        .course_title {
+            width: 107px;
+            color: rgba(51, 51, 51, 1);
+            position: absolute;
+            top: 294px;
+            left: 89px;
+            font-family: Poppins;
+            font-weight: Medium;
+            font-size: 16px;
+            opacity: 1;
+            text-align: left;
+        }
+
+        .course_title_entry {
+            width: 140px;
+            color: rgba(51, 51, 51, 1);
+            position: relative;
+            top: 338px;
+            left: 89px;
+            font-family: Poppins;
+            font-weight: Medium;
+            font-size: 14px;
+            opacity: 1;
+            text-align: left;
+        }
+
+        .completion_date {
+            width: 146px;
+            color: rgba(51, 51, 51, 1);
+            position: absolute;
+            top: 294px;
+            left: 577px;
+            font-family: Poppins;
+            font-weight: Medium;
+            font-size: 16px;
+            opacity: 1;
+            text-align: left;
+        }
+
+        .completion_date_entry {
+            width: 90px;
+            padding-top: 10px;
+            color: rgba(51, 51, 51, 1);
+            position: relative;
+            top: 338px;
+            left: 390px;
+            font-family: Poppins;
+            font-weight: Medium;
+            font-size: 14px;
+            opacity: 1;
+            text-align: left;
+        }
+
+        /* top left portion where the logo goes */
+        .transcript_logo {
+            width: 277px;
+            height: 117px;
+            background: url("transcript\ logo.png");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            opacity: 1;
+            position: absolute;
+            top: 111px;
+            left: 57px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <!-- document body -->
+    <div class="doc_body">
+        <!-- water mark -->
+        <div class="watermark"></div>
+
+        <span class="transcript_title"> Courses Completed Transcript </span>
+
+        <span class="student_name"> NAME Student Name </span>
+
+        <!-- background section where the logo goes -->
+        <div class="transcript_logo"></div>
+
+        <table>
+            <tr>
+                <!-- table headers -->
+                <td><span class="course_title"> COURSE TITLE </span></td>
+                <td><span class="completion_date">COMPLETION DATE</span></td>
+            </tr>
+            <!-- table contents: each course and completion date is on a new row -->
+            <% if (completed_courses.length> 0) { %>
+                <% completed_courses.forEach(course=> { %>
+                    <tr>
+                        <td>
+                            <span class="course_title_entry">
+                                <%= course.course_name %>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="completion_date_entry">
+                                <%= course.date_completed %>
+                            </span>
+                        </td>
+                    </tr>
+                    <% }); %>
+                        <% } %>
+                            <!-- <tr>
+                        <td>
+                            <span class="course_title_entry">Personal Motivation</span>
+                        </td>
+                        <td>
+                            <span class="completion_date_entry">04 / 21 / 2021</span>
+                        </td>
+                    </tr> -->
+        </table>
+    </div>
+</body>
+
+</html>
