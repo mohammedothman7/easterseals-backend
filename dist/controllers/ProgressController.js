@@ -49,7 +49,7 @@ const saveProgress = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         return res.json({
             message: "Progress saved successfully",
             body: {
-                course_progress: {
+                user_grade: {
                     progression,
                     total_pages,
                     user_id,

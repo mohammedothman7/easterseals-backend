@@ -33,7 +33,7 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (!email || !password)
         return res.status(400).json("Please enter required fields!");
     try {
-        // retrive user object
+        // retrieve user object
         const user = yield database_1.pool.query('Select * FROM users WHERE id = $1', [userID]);
         // if current user's email does not match account to be retrieved
         if (email != user.rows[0].email)
@@ -113,7 +113,7 @@ const updateUserPassword = (req, res) => __awaiter(void 0, void 0, void 0, funct
     if (!email || !password)
         return res.status(400).json("Please enter required fields!");
     try {
-        // retrive user to-be-updated object
+        // retrieve user to-be-updated object
         const user = yield database_1.pool.query("Select * FROM users WHERE id = $1", [userID]);
         // if current user's email does not match account to be updated
         if (email != user.rows[0].email)
@@ -206,7 +206,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const userID = parseInt(req.params.userID);
     var { name, new_password, phone_num, date_of_birth, race, gender, address, employment_status, military_affiliated, military_affiliation, military_start_date, military_end_date, last_rank, military_speciality, household_size, income, current_course, completed_courses, referral_source, resources, } = req.body;
     try {
-        // retrive user to-be-updated object
+        // retrieve user to-be-updated object
         const user = yield database_1.pool.query("Select * FROM users WHERE id = $1", [userID]);
         // set fields equal to either new values specified in request or original user values
         name = name ? name : user.rows[0].name;
@@ -288,7 +288,7 @@ const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     if (!email || !password)
         return res.status(400).json("Please enter required fields!");
     try {
-        // retrive user to-be-deleted object
+        // retrieve user to-be-deleted object
         const user = yield database_1.pool.query('Select * FROM users WHERE id = $1', [userID]);
         // if current user's email does not match account to be deleted
         if (email != user.rows[0].email)
