@@ -11,8 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUserTranscript = void 0;
 const database_1 = require("../database");
+// get required packages
+let ejs = require("ejs");
+let pdf = require("html-pdf");
+let path = require("path");
 // TODO: Endpoint to generate PDF of user's completed courses
-// get the required details for that user
 const getUserTranscript = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user_id = parseInt(req.params.userID);
     try {
@@ -30,7 +33,31 @@ const getUserTranscript = (req, res) => __awaiter(void 0, void 0, void 0, functi
         }
         student.rows[0].message = "Courses Completed Transcript";
         student.rows[0].completed_courses = completed_courses.rows;
-        return res.status(200).json(student.rows[0]);
+        // use ejs to render the .ejs file
+        ejs.renderFile('./html/transcript.ejs', { completed_courses: student.rows[0].completed_courses }, function (err, data) {
+            if (err) {
+                // display error if any
+                console.log("line 34");
+                res.send(err + " line 34");
+            }
+            else {
+                // create pdf
+                pdf.create(data).toFile("transcript.pdf", function (err, data) {
+                    if (err) {
+                        // display error if any
+                        console.log("line 53");
+                        res.send(err);
+                    }
+                    else {
+                        res.send("File created successfully");
+                    }
+                });
+            }
+        });
+        return res.status(200).json({ message: "Transcript created successfully" });
+        // return res.status(200).json(
+        //     student.rows[0]
+        // );
     }
     catch (e) {
         console.log(e);
