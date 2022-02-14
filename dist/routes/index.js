@@ -6,7 +6,7 @@ const FeedbackController_1 = require("../controllers/FeedbackController");
 const GradesController_1 = require("../controllers/GradesController");
 const ProgressController_1 = require("../controllers/ProgressController");
 const TranscriptController_1 = require("../controllers/TranscriptController");
-const router = express_1.Router();
+const router = (0, express_1.Router)();
 router.get('/', (req, res) => {
     res.send(`<b>user-related endpoints</b>
             <ul>
