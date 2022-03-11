@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import {getUsers, getUser, createUser, signInUser, updateUser, deleteUser, updateUserPassword} from '../controllers/UsersController'
-import {getAllFeedback, getCourseFeedback, postFeedback} from '../controllers/FeedbackController'
+import {createApplicationFeedback, getAllFeedback, getCourseFeedback, postFeedback} from '../controllers/FeedbackController'
 import {getAllGrades, getUserGrades, getCourseGrades, uploadGrade} from '../controllers/GradesController'
 import {getUserProgress, saveProgress, updateProgress} from '../controllers/ProgressController'
 import {getUserTranscript, getUserDetails} from '../controllers/TranscriptController'
@@ -45,6 +45,7 @@ router.delete('/users/:userID', deleteUser) // delete user (USER/ ADMIN FUNCTION
 router.get('/feedback', getAllFeedback) // get feedback for all courses (ADMIN FUNCTION)
 router.get('/feedback/:courseID', getCourseFeedback) // get feedback for specific course (ADMIN FUNCTION)
 router.post('/feedback', postFeedback) // post new feedback about course (USER FUNCTION)
+router.post('/application-feedback', createApplicationFeedback) // post new feedback about application (USER FUNCTION)
 
 // grade-related endpoints
 router.get('/grades', getAllGrades) // get all grades (ADMIN FUNCTION)
