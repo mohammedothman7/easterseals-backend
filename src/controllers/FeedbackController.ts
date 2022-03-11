@@ -72,3 +72,59 @@ export const postFeedback = async (req: Request, res: Response): Promise<Respons
         return res.status(500).json('Internal Server Error');
     }
 }
+
+export const createApplicationFeedback = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { answer, question, user_id } = req.body;
+
+  try {
+    if (!answer || !question || !user_id) {
+      return res.status(400).json({
+        message: "Missing fields",
+      });
+    }
+    // check if user has given feedback for course before
+    const feedback: QueryResult = await pool.query(
+      "Select * FROM application_feedback WHERE user_id = $1 AND question = $2",
+      [user_id, question]
+    );
+
+    if (feedback.rowCount > 0) {
+      await pool.query(
+        "UPDATE application_feedback SET answer = $1 WHERE user_id = $2 AND question = $3",
+        [answer, user_id, question]
+      );
+
+      return res.json({
+        message: "Feedback updated successfully",
+        body: {
+          course_feedback: {
+            answer,
+            question,
+            user_id,
+          },
+        },
+      });
+    } else {
+      await pool.query(
+        "INSERT INTO application_feedback (answer, question, user_id) VALUES ($1, $2, $3)",
+        [answer, question, user_id]
+      );
+      return res.json({
+        message: "Feedback posted successfully",
+        body: {
+          application_feedback: {
+            answer,
+            question,
+            user_id,
+          },
+        },
+      });
+    }
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json("Internal Server Error");
+  }
+};

@@ -45,6 +45,13 @@ CREATE TABLE user_feedback(
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (course_id) REFERENCES courses (id)
 );
+CREATE TABLE application_feedback(
+    id SERIAL PRIMARY KEY,
+    answer VARCHAR(40),
+    question TEXT,
+    user_id SERIAL NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id),
+);
 
 CREATE TABLE course_progress(
     id SERIAL PRIMARY KEY,
