@@ -15,7 +15,7 @@ export const getUserProgress = async (
       [user_id]
     );
     if (response.rows.length < 1) {
-      res.status(404).json({
+      return res.status(404).json({
         message: "No progress found for this user",
       });
     }
